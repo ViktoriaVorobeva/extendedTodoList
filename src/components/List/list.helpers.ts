@@ -1,9 +1,9 @@
-import type { Todo } from "../../types";
+import type { EditedStatus, Todo } from "../../types";
 
-export const editList = (list: Todo[], name: string) => {
+export const editList = (list: Todo[], name: string, status: EditedStatus) => {
   const index = list.findIndex((el) => el.name === name);
   const copyList = list;
-  copyList[index].status = "completed";
+  copyList[index].status = status;
   return copyList;
 };
 

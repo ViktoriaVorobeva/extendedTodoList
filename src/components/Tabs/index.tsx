@@ -4,6 +4,7 @@ import { Box, Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { Counter } from "../Counter";
 import { ListComponent } from "../List";
 import { TodosContext } from "../../context";
+import { negativeFilterList } from "./tabs.helpers";
 import type { Status } from "../../types";
 
 const tabsStyle: React.CSSProperties = {
@@ -22,7 +23,7 @@ export const TabsComponent = () => {
     return null;
   }
 
-  const { setTodos, setCount } = context;
+  const { todos, setTodos } = context;
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -34,8 +35,7 @@ export const TabsComponent = () => {
   const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
 
-    setTodos([]);
-    setCount(0);
+    setTodos(negativeFilterList(todos, 'completed'));
   };
 
   return (

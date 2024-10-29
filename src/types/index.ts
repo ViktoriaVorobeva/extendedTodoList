@@ -13,3 +13,5 @@ export type ContextValue = {
 }
 
 export type Status = 'all' | 'active' | 'completed';
+
+export type EditedStatus = 'active' | 'completed';

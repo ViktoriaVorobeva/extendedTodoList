@@ -89,35 +89,31 @@ describe("Add todos is ok", () => {
 });
 
 describe("Clear is ok", () => {
-  it("should handle an empty list", () => {
+  it("should handle only active items list", () => {
     render(<Home />);
 
     const input = screen.getByTestId("input").querySelector("input") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "do todo" } });
     fireEvent.click(screen.getByTestId("button-add"));
-    fireEvent.click(screen.getByTestId("button-clear"));
+    fireEvent.change(input, { target: { value: "todo do" } });
+    fireEvent.click(screen.getByTestId("button-add"));
+
+    const checkbox = screen.getByTestId("checkbox-0").querySelector("input") as HTMLInputElement;
+    fireEvent.click(checkbox);
+    fireEvent.click(screen.getByTestId("button-completed"));
 
     const listValue = screen.getByTestId("todos-list");
 
-    expect(listValue.children.length).toBe(0);
-  });
+    expect(listValue.children.length).toBe(1);
 
-  it("should handle an count 0", () => {
-    render(<Home />);
-
-    const input = screen.getByTestId("input").querySelector("input") as HTMLInputElement;
-    fireEvent.change(input, { target: { value: "do todo" } });
-    fireEvent.click(screen.getByTestId("button-add"));
     fireEvent.click(screen.getByTestId("button-clear"));
 
-    const countValue = screen.getByTestId("count");
-
-    expect(countValue.textContent).toBe("0 items left");
+    expect(listValue.children.length).toBe(0);
   });
 });
 
-describe("Add todos and switch is ok", () => {
-  it("should add active items, but not completed", () => {
+describe("Add todos and switch tabs is ok", () => {
+  it("should add only active items, but not completed", () => {
     render(<Home />);
 
     const input = screen.getByTestId("input").querySelector("input") as HTMLInputElement;
@@ -141,7 +137,7 @@ describe("Add todos and switch is ok", () => {
     expect(listValue.children.length).toBe(2);
   });
 
-  it("should switch completed items, but not active", () => {
+  it("should switch active to completed items", () => {
     render(<Home />);
 
     const input = screen.getByTestId("input").querySelector("input") as HTMLInputElement;
@@ -172,5 +168,38 @@ describe("Add todos and switch is ok", () => {
     const countValue = screen.getByTestId("count");
 
     expect(countValue.textContent).toBe("1 items left");
+  });
+
+  it("should switch active to completed items and back", () => {
+    render(<Home />);
+
+    const input = screen.getByTestId("input").querySelector("input") as HTMLInputElement;
+    fireEvent.change(input, { target: { value: "do todo" } });
+    fireEvent.click(screen.getByTestId("button-add"));
+    fireEvent.change(input, { target: { value: "todo do" } });
+    fireEvent.click(screen.getByTestId("button-add"));
+
+    const checkbox = screen.getByTestId("checkbox-0").querySelector("input") as HTMLInputElement;
+    fireEvent.click(checkbox);
+
+    expect(checkbox.checked).toEqual(true);
+
+    fireEvent.click(screen.getByTestId("button-completed"));
+
+    const listValue = screen.getByTestId("todos-list");
+
+    expect(listValue.children.length).toBe(1);
+
+    fireEvent.click(checkbox);
+
+    expect(checkbox.checked).toEqual(false);
+
+    fireEvent.click(screen.getByTestId("button-active"));
+
+    expect(listValue.children.length).toBe(2);
+
+    const countValue = screen.getByTestId("count");
+
+    expect(countValue.textContent).toBe("2 items left");
   });
 });

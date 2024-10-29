@@ -19,7 +19,7 @@ const listStyle: React.CSSProperties = {
 
 const notFirstItemStyle: React.CSSProperties = {
   border: "1px solid black",
-  borderTop: 'none',
+  borderTop: "none",
   padding: "10px",
 };
 
@@ -45,24 +45,25 @@ export const ListComponent: FC<{
   const handleToggle = (todo: Todo) => () => {
     const currentIndex = checked.indexOf(todo.id);
     const newChecked = [...checked];
+    let changedTodoList: Todo[] = [];
 
     if (currentIndex === -1) {
       newChecked.push(todo.id);
+      changedTodoList = editList(todos, todo.name, "completed");
+      setCount(count - 1);
     } else {
       newChecked.splice(currentIndex, 1);
+      changedTodoList = editList(todos, todo.name, "active");
+      setCount(count + 1);
     }
 
     setChecked(newChecked);
 
-    const array = editList(todos, todo.name);
-
     if (status !== "all") {
-      setFilteredTodos(filterList(array, status));
+      setFilteredTodos(filterList(changedTodoList, status));
     }
 
-    setTodos(array);
-
-    setCount(count - 1);
+    setTodos(changedTodoList);
   };
 
   useEffect(() => {
@@ -84,7 +85,6 @@ export const ListComponent: FC<{
               data-testid={`checkbox-${index}`}
               role={undefined}
               onClick={handleToggle(todo)}
-              disabled={checked.includes(todo.id)}
               style={{ ...(checked.includes(todo.id) ? ButtonStyle : null) }}
             >
               <ListItemIcon>
