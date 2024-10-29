@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ViktoriaVorobeva/extendedTodoList/static/css/main.11163be7.css",
-    "main.js": "/ViktoriaVorobeva/extendedTodoList/static/js/main.50652285.js",
-    "static/js/453.7a3ee06e.chunk.js": "/ViktoriaVorobeva/extendedTodoList/static/js/453.7a3ee06e.chunk.js",
+    "main.js": "/ViktoriaVorobeva/extendedTodoList/static/js/main.d9fe70f9.js",
+    "static/js/453.8d76ec32.chunk.js": "/ViktoriaVorobeva/extendedTodoList/static/js/453.8d76ec32.chunk.js",
     "index.html": "/ViktoriaVorobeva/extendedTodoList/index.html",
     "main.11163be7.css.map": "/ViktoriaVorobeva/extendedTodoList/static/css/main.11163be7.css.map",
-    "main.50652285.js.map": "/ViktoriaVorobeva/extendedTodoList/static/js/main.50652285.js.map",
-    "453.7a3ee06e.chunk.js.map": "/ViktoriaVorobeva/extendedTodoList/static/js/453.7a3ee06e.chunk.js.map"
+    "main.d9fe70f9.js.map": "/ViktoriaVorobeva/extendedTodoList/static/js/main.d9fe70f9.js.map",
+    "453.8d76ec32.chunk.js.map": "/ViktoriaVorobeva/extendedTodoList/static/js/453.8d76ec32.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.11163be7.css",
-    "static/js/main.50652285.js"
+    "static/js/main.d9fe70f9.js"
   ]
 }
